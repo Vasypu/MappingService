@@ -17,39 +17,23 @@ public class PointDAO {
     @Autowired
     public PointDAO(JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
+    public List<Point> index() {
+        return jdbcTemplate.query("SELECT * FROM point", new BeanPropertyRowMapper<>(Point.class));
+    }
+
     public Point show(int id) {
         return jdbcTemplate.query("SELECT * FROM point WHERE id=?", new Object[]{id}, new BeanPropertyRowMapper<>(Point.class))
                 .stream().findAny().orElse(null);
     }
 
     public void save(Point point) {
-        jdbcTemplate.update("INSERT INTO Point VALUES(1, ?, ?)", point.getCoordinates(), point.getDescription());
+        jdbcTemplate.update("INSERT INTO point VALUES(1, ?, ?)", point.getCoordinates(), point.getDescription());
     }
 
     public void update(int id, Point updatedPoint) {
-        jdbcTemplate.update("UPDATE Point SET coordinates=?, description=?, WHERE id=?", updatedPoint.getCoordinates(),
+        jdbcTemplate.update("UPDATE Point SET coordinates=?, description=? WHERE id=?", updatedPoint.getCoordinates(),
                 updatedPoint.getDescription(), id);
     }
 
     public void delete(int id) { jdbcTemplate.update("DELETE FROM Point WHERE id=?", id); }
-
-//    private static int POINTS_COUNT;
-//    private List<Point> points;
-//
-//    {
-//        points = new ArrayList<>();
-//
-//        points.add(new Point(++POINTS_COUNT, "Tom", "Some1"));
-//        points.add(new Point(++POINTS_COUNT, "Bob", "Some2"));
-//        points.add(new Point(++POINTS_COUNT, "Mike", "Some3"));
-//        points.add(new Point(++POINTS_COUNT, "Katy", "Some4"));
-//    }
-//
-//    public List<Point> index() {
-//        return points;
-//    }
-//
-//    public Point show(int id) {
-//        return points.stream().filter(point -> point.getId() == id).findAny().orElse(null);
-//    }
 }

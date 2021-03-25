@@ -7,5 +7,12 @@
 <body>
 <p th:text="${point.getCoordinates()}">VALUE</p>
 <p th:text="${point.getDescription()}">VALUE</p>
+
+<a th:href="@{/points/{id}/edit(id=${point.getId()})}">Edit</a>
+
+<form th:method="DELETE" th:action="@{/points/{id}(id=${point.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+
 </body>
 </html>

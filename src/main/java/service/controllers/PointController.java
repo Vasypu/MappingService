@@ -15,27 +15,20 @@ import javax.validation.Valid;
 @RequestMapping("/points")
 public class PointController {
 
-//    private final PointDAO pointDAO;
-//
-//    @Autowired
-//    public PointController(PointDAO pointDAO) {
-//        this.pointDAO = pointDAO;
-//    }
-//
-//    @GetMapping()
-//    public String index(Model model) {
-//        model.addAttribute("points", pointDAO.index());
-//        return "points/index";
-//    }
-//
-//    @GetMapping("/{id}")
-//    public String show(@PathVariable("id") int id, Model model) {
-//        model.addAttribute("point", pointDAO.show(id));
-//        return "points/show";
-//    }
-
     @Autowired
     private PointDAO pointDAO;
+
+    @GetMapping()
+    public String index(Model model) {
+        model.addAttribute("points", pointDAO.index());
+        return "points/index";
+    }
+
+    @GetMapping("/{id}")
+    public String show(@PathVariable("id") int id, Model model) {
+        model.addAttribute("point", pointDAO.show(id));
+        return "points/show";
+    }
 
     @GetMapping("/new")
     public String newPoint(@ModelAttribute("point") Point point) {
@@ -49,7 +42,7 @@ public class PointController {
             return "points/new";
 
         pointDAO.save(point);
-        return "redirect:/point";
+        return "redirect:/points";
     }
 
     @GetMapping("/{id}/edit")
@@ -65,12 +58,12 @@ public class PointController {
             return "points/edit";
 
         pointDAO.update(id, point);
-        return "redirect:/point";
+        return "redirect:/points";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
         pointDAO.delete(id);
-        return "redirect:/point";
+        return "redirect:/points";
     }
 }

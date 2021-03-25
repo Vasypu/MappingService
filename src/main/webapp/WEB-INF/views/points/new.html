@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form th:method="POST" th:action="@{/point}" th:object="${point}">
+<form th:method="POST" th:action="@{/points}" th:object="${point}">
 
     <label for="coordinates">Enter coordinates: </label>
     <input type="text" th:field="*{coordinates}" id="coordinates"/>

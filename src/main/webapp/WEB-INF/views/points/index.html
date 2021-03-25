@@ -7,8 +7,14 @@
 <body>
 
 <div th:each="point : ${points}">
-    <a th:href="@{/points/{id}(id=${point.getCoordinates()})}" th:text="${point.getDescription()}">point</a>
+    <a th:href="@{/points/{id}(id=${point.getId()})}"
+       th:text="${point.getCoordinates() + ', ' + point.getDescription()}">point</a>
 </div>
+
+<br/>
+<hr/>
+
+<a href="/points/new">Create new point</a>
 
 </body>
 </html>
