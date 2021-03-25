@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New point</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/point}" th:object="${point}">
+
+    <label for="coordinates">Enter coordinates: </label>
+    <input type="text" th:field="*{coordinates}" id="coordinates"/>
+    <div style="color:red" th:if="${#fields.hasErrors('coordinates')}" th:errors="*{coordinates}">Coordinates error</div>
+    </br>
+
+    <label for="description">Enter description: </label>
+    <input type="text" th:field="*{description}" id="description"/>
+    <div style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description error</div>
+    </br>
+
+    <input type="submit" value="Create!"/>
+</form>
+</body>
+</html>

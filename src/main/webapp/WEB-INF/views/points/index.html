@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Все точки</title>
+</head>
+<body>
+
+<div th:each="point : ${points}">
+    <a th:href="@{/points/{id}(id=${point.getCoordinates()})}" th:text="${point.getDescription()}">point</a>
+</div>
+
+</body>
+</html>
