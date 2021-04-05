@@ -1,1 +1,1 @@
-worker: sh target/bin/MappingService
+web: java $JAVA_OPTS -jar target/dependency/webapp-runner.jar --port $PORT target/*.war
